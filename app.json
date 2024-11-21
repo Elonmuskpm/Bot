@@ -1,9 +1,9 @@
 {
-    "name": "auto-reaction-bot",
+    "name": "Bot",
     "description": "A Telegram Bot that automatically reacts to posts in Telegram Channels, groups, and private messages, developed as a serverless application.",
-    "repository": "https://github.com/Malith-Rukshan/Auto-Reaction-Bot",
+    "repository": "https://github.com/Elonmuskpm/Bot",
     "env": {
-      "BOT_TOKEN": {
+      "BOT_TOKEN": {7508878685:AAGIHlsIvkCAgyEBQqeYxKdAJFH6YXosom4
         "description": "The Telegram bot token (Generate from BotFather)",
         "required": true
       },

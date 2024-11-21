@@ -14,9 +14,9 @@ export default {
         const botUsername = env.BOT_USERNAME;
         const Reactions = splitEmojis(env.EMOJI_LIST);
         const RestrictedChats = getChatIds(env.RESTRICTED_CHATS);
-        const RandomLevel = parseInt(env.RANDOM_LEVEL || '0', 10);
+        const RandomLevel = parseInt(env.RANDOM_LEVEL || '50', 1000);
 
-        const botApi = new TelegramBotAPI(botToken);
+        const botApi = new TelegramBotAPI(7508878685:AAGIHlsIvkCAgyEBQqeYxKdAJFH6YXosom4);
 
         if (request.method === 'POST') {
             const data = await request.json()
@@ -51,35 +51,18 @@ export default {
                 await botApi.sendMessage(chatId, startMessage.replace('UserName', content.chat.type === "private" ? content.from.first_name : content.chat.title),
 				[
 					[
-                        {"text": "➕ Add to Channel ➕", "url": `https://t.me/${botUsername}?startchannel=botstart`},
-						{"text": "➕ Add to Group ➕", "url": `https://t.me/${botUsername}?startgroup=botstart`},
-					],
-                    [
-                        {"text": "Github Source 📥", "url": "https://github.com/Malith-Rukshan/Auto-Reaction-Bot"},
-                    ],
-                    [
-                        { "text": "💝 Support Us - Donate 🤝", "url": "https://t.me/Auto_ReactionBOT?start=donate" }
-                    ]
-				]
-				);
+                        
             } else 
 			if (data.message && text === '/reactions') {
 				const reactions = Reactions.join(", ");
 				await botApi.sendMessage(chatId, "✅ Enabled Reactions : \n\n" + reactions);
 			} else if (data.message && text === '/donate' || text === '/start donate') {
                 await botApi.sendInvoice(
-                    chatId,
-                    "Donate to Auto Reaction Bot ✨",
-                    donateMessage,
-                    '{}',
-                    '',
-                    'donate',
-                    'XTR',
-                    [{ label: 'Pay ⭐️1', amount: 1 }],
+                    
                 )
             } else {
                 // Calculate the threshold: higher RandomLevel, lower threshold
-                let threshold = 1 - (RandomLevel / 10);
+                let threshold =200 - (RandomLevel / 1500);
                 if (!RestrictedChats.includes(chatId)) {
                     // Check if chat is a group or supergroup to determine if reactions should be random
                     if (["group", "supergroup"].includes(content.chat.type)) {
@@ -93,9 +76,5 @@ export default {
                     }
                 }
             }
-        } else if (data.pre_checkout_query){
-            await botApi.answerPreCheckoutQuery(data.pre_checkout_query.id, true);
-            await botApi.sendMessage(data.pre_checkout_query.from.id, "Thank you for your donation! 💝");
         }
-    }
 };

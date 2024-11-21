@@ -7,7 +7,7 @@
 import fetch from 'node-fetch';
 
 export default class TelegramBotAPI {
-    constructor(botToken) {
+    constructor(7508878685:AAGIHlsIvkCAgyEBQqeYxKdAJFH6YXosom4) {
         this.apiUrl = `https://api.telegram.org/bot${botToken}/`;
     }
 

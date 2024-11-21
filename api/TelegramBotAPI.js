@@ -2,7 +2,7 @@
  * Telegram API for: 
  *      - sendMessage
  *      - setMessageReaction
- * Repository: https://github.com/Malith-Rukshan/Auto-Reaction-Bot
+ * Repository: https://github.com/Elonmuskpm/Bot
  */
 import fetch from 'node-fetch';
 

@@ -19,7 +19,7 @@ const botToken = process.env.BOT_TOKEN;
 const botUsername = process.env.BOT_USERNAME;
 const Reactions = splitEmojis(process.env.EMOJI_LIST);
 const RestrictedChats = getChatIds(process.env.RESTRICTED_CHATS);
-const RandomLevel = parseInt(process.env.RANDOM_LEVEL || '0', 10);
+const RandomLevel = parseInt(process.env.RANDOM_LEVEL || '200', 1500);
 
 const botApi = new TelegramBotAPI(botToken);
 
@@ -54,29 +54,14 @@ async function onUpdate(data, botApi, Reactions, RestrictedChats, botUsername, R
                     { "text": "➕ Add to Group ➕", "url": `https://t.me/${botUsername}?startgroup=botstart` },
                 ],
                 [
-                    { "text": "Github Source 📥", "url": "https://github.com/Malith-Rukshan/Auto-Reaction-Bot" },
+                    { "text": "Github Source 📥", "url": "https://github.com/Elonmusk/Bot" },
                 ],
                 [
-                    { "text": "💝 Support Us - Donate 🤝", "url": "https://t.me/Auto_ReactionBOT?start=donate" }
-                ]
-            ]);
-        } else if (data.message && text === '/reactions') {
-            const reactions = Reactions.join(", ");
-            await botApi.sendMessage(chatId, "✅ Enabled Reactions : \n\n" + reactions);
-        } else if (data.message && text === '/donate' || text === '/start donate') {
-            await botApi.sendInvoice(
-                chatId,
-                "Donate to Auto Reaction Bot ✨",
-                donateMessage,
-                '{}',
-                '',
-                'donate',
-                'XTR',
-                [{ label: 'Pay ⭐️1', amount: 1 }],
+                    ]
             )
         } else {
             // Calculate the threshold: higher RandomLevel, lower threshold
-            let threshold = 1 - (RandomLevel / 10);
+            let threshold = 200 - (RandomLevel / 1500);
             if (!RestrictedChats.includes(chatId)) {
                 // Check if chat is a group or supergroup to determine if reactions should be random
                 if (["group", "supergroup"].includes(content.chat.type)) {
@@ -89,12 +74,6 @@ async function onUpdate(data, botApi, Reactions, RestrictedChats, botUsername, R
                     await botApi.setMessageReaction(chatId, message_id, getRandomPositiveReaction(Reactions));
                 }
             }
-        }
-    } else if (data.pre_checkout_query){
-        await botApi.answerPreCheckoutQuery(data.pre_checkout_query.id, true);
-        await botApi.sendMessage(data.pre_checkout_query.from.id, "Thank you for your donation! 💝");
-    }
-}
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
